@@ -62,9 +62,9 @@ def price_finder():
         page.raise_for_status()
         soup = BeautifulSoup(page.content, "html.parser")
     except Exception as error:
+        logger.info(f"unsuccessful request: {error}")
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
-
             connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD)
             connection.sendmail(from_addr=EMAIL,
                                 to_addrs=f"{RECEIVE_EMAIL}",
