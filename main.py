@@ -52,7 +52,7 @@ headers = {
 
 def price_finder():
     global dollar_price, pond_price, euro_price, CURRENCY_URL
-    # CURRENCY_URL = "https://irarz.com/"
+    
     try:
         currencyـheaders = {
             "Accept-Language" : "en-US,en;q=0.5",
