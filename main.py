@@ -52,13 +52,13 @@ headers = {
 
 def price_finder():
     global dollar_price, pond_price, euro_price, CURRENCY_URL
-    
+    url = CURRENCY_URL
     try:
         currencyـheaders = {
             "Accept-Language" : "en-US,en;q=0.5",
             "User-Agent": "Defined",
         }
-        page = requests.get(CURRENCY_URL, headers=currencyـheaders)
+        page = requests.get(url, headers=currencyـheaders)
         page.raise_for_status()
         soup = BeautifulSoup(page.content, "html.parser")
     except Exception as error:
@@ -68,7 +68,7 @@ def price_finder():
             connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD)
             connection.sendmail(from_addr=EMAIL,
                                 to_addrs=f"{RECEIVE_EMAIL}",
-                                msg=f"Subject:Woo Price update failed\n\nconnection to {CURRENCY_URL} wasn't successful. So, products price update failed. Error message: {error}")
+                                msg=f"Subject:Woo Price update failed\n\nconnection to {url} wasn't successful. So, products price update failed. Error message: {error}")
          
 
     usd_max = soup.find(id="usdmax")
