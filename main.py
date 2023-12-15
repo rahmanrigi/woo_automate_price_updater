@@ -1,7 +1,7 @@
 import logging
 import logging.handlers
 import os
-from giftcards import giftcards
+
 import base64
 from bs4 import BeautifulSoup
 import smtplib
