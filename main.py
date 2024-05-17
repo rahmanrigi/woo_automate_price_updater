@@ -1,7 +1,7 @@
 import logging
 import logging.handlers
 import os
-
+import re
 import base64
 from bs4 import BeautifulSoup
 import smtplib
@@ -88,25 +88,49 @@ def price_finder():
                                 msg=f"Subject:Woo Price update failed\n\nconnection to {url} wasn't successful. So, products price update failed. Error message: {error}")
 
 
-    usd_max = soup.find(id="usdmax")
-    dollar = usd_max.text.replace(",", "")
-    dollar_price = int(str(dollar)[:-1])
+    # usd_max = soup.find(id="usdmax")
+    # dollar = usd_max.text.replace(",", "")
+    # dollar_price = int(str(dollar)[:-1])
 
-    en_pond = soup.find(id="price_gbp")
-    pond = en_pond.text.replace(",", "")
-    pond_price = int(str(pond)[:-1])
+    usd_table = soup.find(string="USD").find_next('table').find_next('table').find_next('table')
+    usd_price = usd_table.find('td').text.replace(',','')
+    dollar_price= int(re.search(r'\d+', usd_price).group())
 
-    eur = soup.find(id="price_eur")
-    eur = eur.text.replace(",", "")
-    euro_price = int(str(eur)[:-1])
+
+    # en_pond = soup.find(id="price_gbp")
+    # pond = en_pond.text.replace(",", "")
+    # pond_price = int(str(pond)[:-1])
     
-    aed_emirates = soup.find(id="price_aed")
-    aed = aed_emirates.text.replace(",", "")
-    aed_emirates_price = int(str(aed)[:-1])
+    gbp_table = soup.find(string="GBP").find_next('table').find_next('table').find_next('table')
+    gbp_price = gbp_table.find('td').text.replace(',','')
+    pond_price= int(re.search(r'\d+', gbp_price).group())
+
+
+    # eur = soup.find(id="price_eur")
+    # eur = eur.text.replace(",", "")
+    # euro_price = int(str(eur)[:-1])
+
+    eur_table = soup.find(string="EUR").find_next('table').find_next('table').find_next('table')
+    eur_price = eur_table.find('td').text.replace(',','')
+    euro_price= int(re.search(r'\d+', eur_price).group())
     
-    try_turkey = soup.find(id="price_try")
-    try_tr = try_turkey.text.replace(",", "")
-    try_turkey_price = int(str(try_tr)[:-1])
+    # aed_emirates = soup.find(id="price_aed")
+    # aed = aed_emirates.text.replace(",", "")
+    # aed_emirates_price = int(str(aed)[:-1])
+
+    aed_table = soup.find(string="AED").find_next('table').find_next('table').find_next('table')
+    aed_price = aed_table.find('td').text.replace(',','')
+    aed_emirates_price= int(re.search(r'\d+', aed_price).group())
+
+    
+    # try_turkey = soup.find(id="price_try")
+    # try_tr = try_turkey.text.replace(",", "")
+    # try_turkey_price = int(str(try_tr)[:-1])
+
+    try_table = soup.find(string="TRY").find_next('table').find_next('table').find_next('table')
+    try_price = try_table.find('td').text.replace(',','')
+    try_turkey_price= int(re.search(r'\d+', try_price).group())
+
 
 price_finder()
 
