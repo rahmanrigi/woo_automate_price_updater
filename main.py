@@ -29,6 +29,7 @@ try:
     EMAIL_APP_PASSWORD = os.environ["EMAIL_APP_PASSWORD"]
     RECEIVE_EMAIL = os.environ["RECEIVE_EMAIL"]
     CURRENCY_URL = os.environ["CURRENCY_URL"]
+    DOLLAR_URL = os.environ["DOLLAR_URL"]
 except KeyError:
     SOME_SECRET = "Token not available!"
     CONSUMER_KEY = "Token not available!"
@@ -38,6 +39,7 @@ except KeyError:
     EMAIL_APP_PASSWORD = "Token not available!"
     RECEIVE_EMAIL = "Token not available!"
     CURRENCY_URL = "Token not available!"
+    DOLLAR_URL = "Token not available!"
     #logger.info("Token not available!")
     #raise
 
@@ -70,11 +72,12 @@ except Exception as error:
 def price_finder():
     global dollar_price, pond_price, euro_price, try_turkey_price, aed_emirates_price, CURRENCY_URL
     url = CURRENCY_URL
+    dollar_url = DOLLAR_URL
+    currencyـheaders = {
+        "Accept-Language" : "en-US,en;q=0.5",
+        "User-Agent": "Defined",
+    }
     try:
-        currencyـheaders = {
-            "Accept-Language" : "en-US,en;q=0.5",
-            "User-Agent": "Defined",
-        }
         page = requests.get(url, headers=currencyـheaders)
         page.raise_for_status()
         soup = BeautifulSoup(page.content, "html.parser")
@@ -85,51 +88,27 @@ def price_finder():
             connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD)
             connection.sendmail(from_addr=EMAIL,
                                 to_addrs=f"{RECEIVE_EMAIL}",
-                                msg=f"Subject:Woo Price update failed\n\nconnection to {url} wasn't successful. So, products price update failed. Error message: {error}")
+                                msg=f"Subject:Woo (pond, try, aed, euro,) Price update failed\n\nconnection to {url} wasn't successful. So, products price update failed. Error message: {error}")
+    try:
+        dollar_response = requests.get(dollar_url, headers=currencyـheaders)
+        dollar_dict = dollar_response.json()
+        usd_price = int(str(dollar_dict['high'])[:-1])
+    except Exception as error:
+        logger.info(f"unsuccessful request: {error}")
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD)
+            connection.sendmail(from_addr=EMAIL,
+                                to_addrs=f"{RECEIVE_EMAIL}",
+                                msg=f"Subject:Woo (DOLLAR Products) Price update failed\n\nconnection to {dollar_url} wasn't successful. So, products price update failed. Error message: {error}")
 
+    dollar_price= usd_price
 
-    # usd_max = soup.find(id="usdmax")
-    # dollar = usd_max.text.replace(",", "")
-    # dollar_price = int(str(dollar)[:-1])
-
-    usd_table = soup.find(string="USD").find_next('table').find_next('table').find_next('table')
-    usd_price = usd_table.find('td').text.replace(',','')
-    dollar_price= int(re.search(r'\d+', usd_price).group())
-
-
-    # en_pond = soup.find(id="price_gbp")
-    # pond = en_pond.text.replace(",", "")
-    # pond_price = int(str(pond)[:-1])
-    
-    gbp_table = soup.find(string="GBP").find_next('table').find_next('table').find_next('table')
-    gbp_price = gbp_table.find('td').text.replace(',','')
-    pond_price= int(re.search(r'\d+', gbp_price).group())
-
-
-    # eur = soup.find(id="price_eur")
-    # eur = eur.text.replace(",", "")
-    # euro_price = int(str(eur)[:-1])
-
-    eur_table = soup.find(string="EUR").find_next('table').find_next('table').find_next('table')
-    eur_price = eur_table.find('td').text.replace(',','')
-    euro_price= int(re.search(r'\d+', eur_price).group())
-    
-    # aed_emirates = soup.find(id="price_aed")
-    # aed = aed_emirates.text.replace(",", "")
-    # aed_emirates_price = int(str(aed)[:-1])
-
-    aed_table = soup.find(string="AED").find_next('table').find_next('table').find_next('table')
-    aed_price = aed_table.find('td').text.replace(',','')
-    aed_emirates_price= int(re.search(r'\d+', aed_price).group())
-
-    
-    # try_turkey = soup.find(id="price_try")
-    # try_tr = try_turkey.text.replace(",", "")
-    # try_turkey_price = int(str(try_tr)[:-1])
-
-    try_table = soup.find(string="TRY").find_next('table').find_next('table').find_next('table')
-    try_price = try_table.find('td').text.replace(',','')
-    try_turkey_price= int(re.search(r'\d+', try_price).group())
+    arz_table = soup.find(string="نرخ ارز آزاد").find_next('tbody')
+    euro_price = int(arz_table.find('span', attrs={'class':'mini-flag flag-eu'}).find_next('td', attrs={'class':'market-high'}).text.strip().replace(',','')[:-1])
+    aed_emirates_price = int(arz_table.find('span', attrs={'class':'mini-flag flag-ae'}).find_next('td', attrs={'class':'market-high'}).text.strip().replace(',','')[:-1])
+    pond_price = int(arz_table.find('span', attrs={'class':'mini-flag flag-gb'}).find_next('td', attrs={'class':'market-high'}).text.strip().replace(',','')[:-1])
+    try_turkey_price = int(arz_table.find('span', attrs={'class':'mini-flag flag-tr'}).find_next('td', attrs={'class':'market-high'}).text.strip().replace(',','')[:-1])
 
 
 price_finder()
@@ -140,7 +119,7 @@ data = {'update': []
 def calculate_prices(price,value, p_id):
     global data, rounded_product_today_price
 
-    product_today_price = (price * value) + 100000
+    product_today_price = (price * value) + 150000
     rounded_product_today_price = round(product_today_price, -4)
 
     product_price_data = {'id': p_id,
