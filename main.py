@@ -29,6 +29,7 @@ try:
     BATCH_PRODUCTS_UPDATE_URL = os.environ["BATCH_PRODUCTS_UPDATE_URL"]
     EMAIL = os.environ["EMAIL"]
     EMAIL_APP_PASSWORD = os.environ["EMAIL_APP_PASSWORD"]
+    EMAIL_APP_PASSWORD_LATEST = os.environ["EMAIL_APP_PASSWORD_LATEST"]
     RECEIVE_EMAIL = os.environ["RECEIVE_EMAIL"]
     CURRENCY_URL = os.environ["CURRENCY_URL"]
     DOLLAR_URL = os.environ["DOLLAR_URL"]
@@ -64,7 +65,7 @@ except Exception as error:
     logger.info(f"unsuccessful request: {error}")
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
-        connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD)
+        connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD_LATEST)
         connection.sendmail(from_addr=EMAIL,
                         to_addrs=f"{RECEIVE_EMAIL}",
                         msg=f"Subject:Woo Price update failed\n\nAccess to the products was fail. So, products price update failed. Error message: {error}")
@@ -86,7 +87,7 @@ def price_finder():
         logger.info(f"unsuccessful request: {error}")
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
-            connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD)
+            connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD_LATEST)
             connection.sendmail(from_addr=EMAIL,
                                 to_addrs=f"{RECEIVE_EMAIL}",
                                 msg=f"Subject:Woo (pond, try, aed, euro,) Price update failed\n\nconnection to {url} wasn't successful. So, products price update failed. Error message: {error}")
@@ -98,7 +99,7 @@ def price_finder():
         logger.info(f"unsuccessful request: {error}")
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
-            connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD)
+            connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD_LATEST)
             connection.sendmail(from_addr=EMAIL,
                                 to_addrs=f"{RECEIVE_EMAIL}",
                                 msg=f"Subject:Woo (DOLLAR Products) Price update failed\n\nconnection to {dollar_url} wasn't successful. So, products price update failed. Error message: {error}")
@@ -157,7 +158,7 @@ if __name__ == "__main__":
         if woo_response.status_code == 200:
             with smtplib.SMTP("smtp.gmail.com") as connection:
                 connection.starttls()
-                connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD)
+                connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD_LATEST)
                 connection.sendmail(from_addr=EMAIL,
                                     to_addrs=f"{RECEIVE_EMAIL}",
                                     msg=f"Subject:Products updated\n\n Congratulation! All products price updated successfully. connection to woocommerce was Ok!")
@@ -166,7 +167,7 @@ if __name__ == "__main__":
     except:
         with smtplib.SMTP("smtp.gmail.com") as connection:
                 connection.starttls()
-                connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD)
+                connection.login(user=EMAIL, password=EMAIL_APP_PASSWORD_LATEST)
                 connection.sendmail(from_addr=EMAIL,
                                     to_addrs=f"{RECEIVE_EMAIL}",
                                     msg=f"Subject:update failed\n\n There is something wrong with woocommerce connection. All products price updated *wasn't* successfully")
