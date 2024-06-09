@@ -25,7 +25,7 @@ try:
     CONSUMER_KEY = os.environ["CONSUMER_KEY"]
     CONSUMER_SECRET = os.environ["CONSUMER_SECRET"]
     URL = os.environ["URL"]
-    PRODUCTS_URL = ["PRODUCTS_URL"]
+    PRODUCTS_URL = os.environ["PRODUCTS_URL"]
     BATCH_PRODUCTS_UPDATE_URL = os.environ["BATCH_PRODUCTS_UPDATE_URL"]
     EMAIL = os.environ["EMAIL"]
     EMAIL_APP_PASSWORD = os.environ["EMAIL_APP_PASSWORD"]
@@ -43,6 +43,8 @@ except KeyError:
     RECEIVE_EMAIL = "Token not available!"
     CURRENCY_URL = "Token not available!"
     DOLLAR_URL = "Token not available!"
+    PRODUCTS_URL = "Token not available!"
+    EMAIL_APP_PASSWORD_LATEST = "Token not available!"
     #logger.info("Token not available!")
     #raise
 
