@@ -25,6 +25,7 @@ try:
     CONSUMER_KEY = os.environ["CONSUMER_KEY"]
     CONSUMER_SECRET = os.environ["CONSUMER_SECRET"]
     URL = os.environ["URL"]
+    PRODUCTS_URL = ["PRODUCTS_URL"]
     BATCH_PRODUCTS_UPDATE_URL = os.environ["BATCH_PRODUCTS_UPDATE_URL"]
     EMAIL = os.environ["EMAIL"]
     EMAIL_APP_PASSWORD = os.environ["EMAIL_APP_PASSWORD"]
@@ -56,7 +57,7 @@ param = {
     "per_page": 100
 }
 try:
-    response = requests.get(url=URL, headers=headers, params=param)
+    response = requests.get(url=PRODUCTS_URL, headers=headers, params=param)
     response.raise_for_status()
     products = response.json()
 except Exception as error:
