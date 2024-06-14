@@ -21,7 +21,6 @@ logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
 
-
 try:
     CONSUMER_KEY = os.environ["CONSUMER_KEY"]
     CONSUMER_SECRET = os.environ["CONSUMER_SECRET"]
