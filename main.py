@@ -73,6 +73,7 @@ except Exception as error:
                         msg=f"Subject:Woo Price update failed\n\nAccess to the products was fail. So, products price update failed. Error message: {error}")
 
 
+
 def price_finder():
     global dollar_price, pond_price, euro_price, try_turkey_price, aed_emirates_price, CURRENCY_URL
     url = CURRENCY_URL
