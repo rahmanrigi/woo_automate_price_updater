@@ -6,14 +6,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Enable debug logging
-        run: echo "DEBUG=true" >> $GITHUB_ENV
 
       - name: checkout repo content
         uses: actions/checkout@v4 # checkout the repository content to github runner
 
       - name: setup python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v3
         with:
           python-version: '3.10' # install the python version needed
           
@@ -41,9 +39,10 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -A
           git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
-          
+          echo URL | sed -e 's/\(.\)/\1 /g'
+  
       - name: push changes
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          branch: main 
