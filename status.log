@@ -146,3 +146,7 @@
 2024-07-18 17:08:04,929 - __main__ - INFO - Token value: 78910
 2024-07-18 17:08:04,929 - __main__ - INFO - Token value: 'ck_cf034a59f2ab55039ec095404b67ae1697d11b40'
 2024-07-18 17:08:04,929 - __main__ - INFO - Token value: 'https://psgift.ir/wp-json/wc/v3/products'
+2024-07-18 17:11:55,386 - __main__ - INFO - Token value: 78910
+2024-07-18 17:11:55,387 - __main__ - INFO - Token value: 'ck_cf034a59f2ab55039ec095404b67ae1697d11b40'
+2024-07-18 17:11:55,387 - __main__ - INFO - Token value: 'https://psgift.ir/wp-json/wc/v3/products'
+2024-07-18 17:11:55,387 - __main__ - INFO - Token value: "https://psgift.ir/wp-json/wc/v3/products/batch"
