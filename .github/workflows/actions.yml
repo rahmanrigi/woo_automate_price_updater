@@ -23,14 +23,6 @@ jobs:
       - name: execute py script # run main.py
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
-          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
-          CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
-          URL: ${{ secrets.URL }}
-          BATCH_PRODUCTS_UPDATE_URL: ${{ secrets.BATCH_PRODUCTS_UPDATE_URL }}
-          EMAIL: ${{ secrets.EMAIL }}
-          EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
-          RECEIVE_EMAIL: ${{ secrets.RECEIVE_EMAIL }}
-          CURRENCY_URL: ${{ secrets.CURRENCY_URL }}
         run: python main.py
           
       - name: commit files
@@ -39,9 +31,9 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -A
           git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
-  
+          
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: ${{ secrets.NEW_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main 
