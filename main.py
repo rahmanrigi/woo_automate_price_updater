@@ -20,6 +20,7 @@ try:
     SOME_SECRET = os.environ["SOME_SECRET"]
     CK = os.environ["CK"]
     CS = os.environ["CS"]
+    PRODUCT_URL = os.environ["PRODUCT_URL"]
 except KeyError:
     SOME_SECRET = "Token not available!"
     CK = "Token not available!"

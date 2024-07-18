@@ -25,6 +25,7 @@ jobs:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
           CK: ${{ secrets.CK }}
           CS: ${{ secrets.CS }}
+          PRODUCT_URL: ${{ secrets.PRODUCT_URL }}
         run: python main.py
           
       - name: commit files
