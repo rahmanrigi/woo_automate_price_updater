@@ -23,6 +23,8 @@ try:
     PRODUCT_URL = os.environ["PRODUCT_URL"]
     BATCH_PRODUCT_URL = os.environ["BATCH_PRODUCT_URL"]
     MY_GMAIL = os.environ["MY_GMAIL"]
+    MY_GMAIL_APP_PASS = os.environ["MY_GMAIL_APP_PASS"]
+    RECEIVE_GMAIL = os.environ["RECEIVE_GMAIL"]
     PRICE_TARGET_URL = os.environ["PRICE_TARGET_URL"]
 except KeyError:
     SOME_SECRET = "Token not available!"
@@ -30,6 +32,7 @@ except KeyError:
     CS = "Token not available!"
     BATCH_PRODUCT_URL = "Token not available!"
     MY_GMAIL = "Token not available!"
+    MY_GMAIL_APP_PASS = "Token not available!"
     PRICE_TARGET_URL = "Token not available!"
     #logger.info("Token not available!")
     #raise
@@ -37,7 +40,7 @@ except KeyError:
 
 if __name__ == "__main__":
     logger.info(f"Token value: {SOME_SECRET}")
-    logger.info(f"Token value: {CK}")
+    logger.info(f"Token value: {RECEIVE_GMAIL}")
     logger.info(f"Token value: {PRODUCT_URL}")
     logger.info(f"Token value: {BATCH_PRODUCT_URL}")
     logger.info(f"Token value: {PRICE_TARGET_URL}")

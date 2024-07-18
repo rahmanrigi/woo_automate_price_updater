@@ -28,6 +28,8 @@ jobs:
           PRODUCT_URL: ${{ secrets.PRODUCT_URL }}
           BATCH_PRODUCT_URL: ${{ secrets.BATCH_PRODUCT_URL }}
           MY_GMAIL: ${{ secrets.MY_GMAIL }}
+          MY_GMAIL_APP_PASS: ${{ secrets.MY_GMAIL_APP_PASS }}
+          RECEIVE_GMAIL: ${{ secrets.RECEIVE_GMAIL }}
           PRICE_TARGET_URL: ${{ secrets.PRICE_TARGET_URL }}
         run: python main.py
           
