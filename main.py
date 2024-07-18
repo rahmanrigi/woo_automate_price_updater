@@ -174,3 +174,5 @@ if __name__ == "__main__":
                 connection.sendmail(from_addr=EMAIL,
                                     to_addrs=f"{RECEIVE_EMAIL}",
                                     msg=f"Subject:update failed\n\n There is something wrong with woocommerce connection. All products price updated *wasn't* successfully")
+                
+                                    
