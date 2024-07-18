@@ -139,3 +139,5 @@
 2024-06-29 13:02:27,743 - __main__ - INFO - unsuccessful request: Invalid URL 'Token not available!': No scheme supplied. Perhaps you meant https://Token not available!?
 2024-07-18 16:34:30,879 - __main__ - INFO - Token value: 1234
 2024-07-18 16:42:03,447 - __main__ - INFO - Token value: 78910
+2024-07-18 16:54:47,971 - __main__ - INFO - Token value: 78910
+2024-07-18 16:54:47,971 - __main__ - INFO - Token value: 'ck_cf034a59f2ab55039ec095404b67ae1697d11b40'
