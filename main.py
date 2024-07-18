@@ -22,11 +22,13 @@ try:
     CS = os.environ["CS"]
     PRODUCT_URL = os.environ["PRODUCT_URL"]
     BATCH_PRODUCT_URL = os.environ["BATCH_PRODUCT_URL"]
+    MY_GMAIL = os.environ["MY_GMAIL"]
 except KeyError:
     SOME_SECRET = "Token not available!"
     CK = "Token not available!"
     CS = "Token not available!"
     BATCH_PRODUCT_URL = "Token not available!"
+    MY_GMAIL = "Token not available!"
     #logger.info("Token not available!")
     #raise
 
