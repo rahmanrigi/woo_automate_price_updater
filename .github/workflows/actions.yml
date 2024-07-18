@@ -24,6 +24,7 @@ jobs:
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
           CK: ${{ secrets.CK }}
+          CS: ${{ secrets.CS }}
         run: python main.py
           
       - name: commit files

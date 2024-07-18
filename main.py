@@ -19,9 +19,11 @@ h = 0
 try:
     SOME_SECRET = os.environ["SOME_SECRET"]
     CK = os.environ["CK"]
+    CS = os.environ["CS"]
 except KeyError:
     SOME_SECRET = "Token not available!"
     CK = "Token not available!"
+    CS = "Token not available!"
     #logger.info("Token not available!")
     #raise
 
