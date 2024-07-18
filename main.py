@@ -18,14 +18,17 @@ logger.addHandler(logger_file_handler)
 h = 0
 try:
     SOME_SECRET = os.environ["SOME_SECRET"]
+    CK = os.environ["CK"]
 except KeyError:
     SOME_SECRET = "Token not available!"
+    CK = "Token not available!"
     #logger.info("Token not available!")
     #raise
 
 
 if __name__ == "__main__":
     logger.info(f"Token value: {SOME_SECRET}")
+    logger.info(f"Token value: {CK}")
 
     r = requests.get('https://weather.talkpython.fm/api/weather/?city=Berlin&country=DE')
     if r.status_code == 200:
