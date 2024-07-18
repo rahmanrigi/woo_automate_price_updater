@@ -82,6 +82,7 @@ def price_finder():
         "Accept-Language" : "en-US,en;q=0.5",
         "User-Agent": "Defined",
     }
+    
     try:
         page = requests.get(url, headers=currencyـheaders)
         page.raise_for_status()
