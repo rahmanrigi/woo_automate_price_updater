@@ -26,6 +26,7 @@ jobs:
           CK: ${{ secrets.CK }}
           CS: ${{ secrets.CS }}
           PRODUCT_URL: ${{ secrets.PRODUCT_URL }}
+          BATCH_PRODUCT_URL: ${{ secrets.BATCH_PRODUCT_URL }}
         run: python main.py
           
       - name: commit files

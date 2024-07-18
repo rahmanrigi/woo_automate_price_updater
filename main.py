@@ -21,10 +21,12 @@ try:
     CK = os.environ["CK"]
     CS = os.environ["CS"]
     PRODUCT_URL = os.environ["PRODUCT_URL"]
+    BATCH_PRODUCT_URL = os.environ["BATCH_PRODUCT_URL"]
 except KeyError:
     SOME_SECRET = "Token not available!"
     CK = "Token not available!"
     CS = "Token not available!"
+    BATCH_PRODUCT_URL = "Token not available!"
     #logger.info("Token not available!")
     #raise
 
@@ -33,6 +35,7 @@ if __name__ == "__main__":
     logger.info(f"Token value: {SOME_SECRET}")
     logger.info(f"Token value: {CK}")
     logger.info(f"Token value: {PRODUCT_URL}")
+    logger.info(f"Token value: {BATCH_PRODUCT_URL}")
 
     r = requests.get('https://weather.talkpython.fm/api/weather/?city=Berlin&country=DE')
     if r.status_code == 200:
