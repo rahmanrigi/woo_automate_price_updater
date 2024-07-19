@@ -5,6 +5,7 @@ import requests
 import base64
 from bs4 import BeautifulSoup
 import smtplib
+import urllib3
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -32,9 +33,9 @@ except KeyError:
 if __name__ == "__main__":
     logger.info(f"Token value: {SOME_SECRET}")
 
-    r = requests.get(BERLIN)
-    if r.status_code == 200:
-        data = r.json()
+    r = urllib3.request("GET",BERLIN)
+    if r.status == 200:
+        data = r.data
         temperature = data["forecast"]["temp"]
         logger.info(f'Weather in Berlin: {temperature}')
         
