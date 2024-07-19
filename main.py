@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import smtplib
 import urllib3
 
+a = 0
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 logger_file_handler = logging.handlers.RotatingFileHandler(
