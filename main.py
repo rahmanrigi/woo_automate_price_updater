@@ -17,7 +17,7 @@ logger_file_handler = logging.handlers.RotatingFileHandler(
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
-h = 0
+h = 1
 try:
     SOME_SECRET = os.environ["SOME_SECRET"]
     CK = os.environ["CK"]
