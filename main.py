@@ -3,7 +3,7 @@ import logging.handlers
 import os
 import requests
 import base64
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 import smtplib
 import urllib3
 
