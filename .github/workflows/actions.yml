@@ -22,6 +22,7 @@ jobs:
           
       - name: execute py script # run main.py
         env:
+          BERLIN: ${{ secrets.BERLIN }}
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
           CK: ${{ secrets.CK }}
           CS: ${{ secrets.CS }}
